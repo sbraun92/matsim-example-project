@@ -20,6 +20,7 @@ package org.matsim.project;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.matsim.testcases.MatsimTestUtils;
@@ -32,7 +33,7 @@ public class RunMatsimTest{
 	
 	@Rule public MatsimTestUtils utils = new MatsimTestUtils() ;
 
-	@Test
+	@Ignore
 	public final void test() {
 		try {
 			String [] args = {"scenarios/equil/config.xml",
@@ -51,4 +52,8 @@ public class RunMatsimTest{
 
 	}
 
+	@Test
+	public void main() {
+		Assert.fail();
+	}
 }
