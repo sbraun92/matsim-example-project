@@ -23,7 +23,11 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.matsim.core.utils.io.IOUtils;
+import org.matsim.examples.ExamplesUtils;
 import org.matsim.testcases.MatsimTestUtils;
+
+import java.net.URL;
 
 /**
  * @author nagel
@@ -33,16 +37,20 @@ public class RunMatsimTest{
 	
 	@Rule public MatsimTestUtils utils = new MatsimTestUtils() ;
 
-	@Ignore
+	@Test
 	public final void test() {
 		try {
-			String [] args = {"scenarios/equil/config.xml",
-				  "--config:controler.outputDirectory", utils.getOutputDirectory(),
-				  "--config:controler.lastIteration=1",
-				  "--config:controler.writeEventsInterval=1"
-			} ;
+			final URL baseUrl = ExamplesUtils.getTestScenarioURL("equil");
+			final String fullUrl = IOUtils.extendUrl(baseUrl,"config.xml").toString();
+			String [] args = {
+					fullUrl,
+					"--config:controler.outputDirectory", utils.getOutputDirectory(),
+					"--config:controler.lastIteration=1"
+			};
 			RunMatsim.main( args ) ;
 		} catch ( Exception ee ) {
+
+
 			Logger.getLogger(this.getClass()).fatal("there was an exception: \n" + ee ) ;
 
 			// if one catches an exception, then one needs to explicitly fail the test:
@@ -52,7 +60,7 @@ public class RunMatsimTest{
 
 	}
 
-	@Test
+	@Ignore
 	public void main() {
 		Assert.fail();
 	}
